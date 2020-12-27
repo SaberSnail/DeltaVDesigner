@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GoldenAnvil.Utility\GoldenAnvil.Utility.Windows\GoldenAnvil.Utility.Windows.csproj" />
+    <ProjectReference Include="..\..\GoldenAnvil.Utility\GoldenAnvil.Utility\GoldenAnvil.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="OurResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OurResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UI\ComponentLayout\OurResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OurResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UI\HitTables\OurResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OurResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="OurResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OurResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\ComponentLayout\OurResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OurResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\HitTables\OurResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OurResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

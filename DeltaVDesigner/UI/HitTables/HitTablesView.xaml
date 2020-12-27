@@ -1,0 +1,80 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:DeltaVDesigner.Models"
+	xmlns:local="clr-namespace:DeltaVDesigner.UI.HitTables"
+	>
+
+	<DataTemplate DataType="{x:Type models:HitTableRow}">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="Id" />
+				<ColumnDefinition Width="Auto" SharedSizeGroup="Chance" />
+				<ColumnDefinition Width="Auto" SharedSizeGroup="Excess" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Column="0"
+				Text="{Binding Title}"
+				/>
+			<TextBlock
+				Margin="8,0,0,0"
+				Grid.Column="1"
+				Text="{Binding Portion}"
+				/>
+			<ItemsControl
+				Margin="8,0,0,0"
+				Grid.Column="2"
+				Grid.IsSharedSizeScope="true"
+				ItemsSource="{Binding ExcessHitRows}"
+				/>
+		</Grid>
+	</DataTemplate>
+	
+	<DataTemplate DataType="{x:Type models:HitTablesViewModel}">
+		<DockPanel>
+			<DockPanel Dock="Top">
+				<TextBlock TextWrapping="Wrap">
+					<Run Text="{x:Static local:OurResources.TotalSideArea}" />
+					<Run Text="{Binding TotalSideArea, StringFormat=F2}" />
+					<Run Text="{x:Static local:OurResources.TotalFrontArea}" />
+					<Run Text="{Binding TotalFrontArea, StringFormat=F2}" />
+				</TextBlock>
+			</DockPanel>
+			<DockPanel>
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="Left" />
+					<ItemsControl
+						Margin="0,0,12,0"
+						Grid.IsSharedSizeScope="true"
+						ItemsSource="{Binding LeftHitRows}"
+						/>
+				</DockPanel>
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="Right" />
+					<ItemsControl
+						Margin="0,0,12,0"
+						Grid.IsSharedSizeScope="true"
+						ItemsSource="{Binding RightHitRows}"
+						/>
+				</DockPanel>
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="Front" />
+					<ItemsControl
+						Margin="0,0,12,0"
+						Grid.IsSharedSizeScope="true"
+						ItemsSource="{Binding FrontHitRows}"
+						/>
+				</DockPanel>
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="Back" />
+					<ItemsControl
+						Margin="0,0,12,0"
+						Grid.IsSharedSizeScope="true"
+						ItemsSource="{Binding BackHitRows}"
+						/>
+				</DockPanel>
+			</DockPanel>
+		</DockPanel>
+	</DataTemplate>
+
+</ResourceDictionary>
