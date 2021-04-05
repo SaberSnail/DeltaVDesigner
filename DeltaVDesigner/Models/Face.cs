@@ -26,6 +26,9 @@ namespace DeltaVDesigner.Models
 		public decimal Right => X + Width;
 		public decimal Bottom => Y + Height;
 
+		public decimal CenterX => X + (Width / 2.0M);
+		public decimal CenterY => Y + (Height / 2.0M);
+
 		public bool IntersectsWith(Face that)
 		{
 			if (IsEmpty || that.IsEmpty)

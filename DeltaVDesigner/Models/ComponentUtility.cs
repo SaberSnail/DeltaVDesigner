@@ -57,23 +57,49 @@ namespace DeltaVDesigner.Models
 				components.Max(x => x.GetFaceCoordinate(Direction.Top)));
 		}
 
-		public static Face SnapFaceToGuides(Face face, IEnumerable<decimal> horizontalGuides, IEnumerable<decimal> verticalGuides, decimal tolerance)
+		public static Face SnapFaceToGuides(Face face, IEnumerable<Face> guideFaces, decimal tolerance)
 		{
-			var bestVerticalGuideline = verticalGuides
-				.Where(x => (Math.Abs(x - face.Left) < tolerance) || (Math.Abs(x - face.Right) < tolerance))
-				.OrderBy(x => Math.Min(Math.Abs(x - face.Left), Math.Abs(x - face.Right)))
-				.FirstOrDefault(face.X);
-			var newX = Math.Abs(bestVerticalGuideline - face.Left) < Math.Abs(bestVerticalGuideline - face.Right) ?
-				bestVerticalGuideline : bestVerticalGuideline - face.Width;
+			var localGuideFaces = guideFaces.AsReadOnlyList();
 
-			var bestHorizontalGuideline = horizontalGuides
-				.Where(y => (Math.Abs(y - face.Top) < tolerance) || (Math.Abs(y - face.Bottom) < tolerance))
-				.OrderBy(y => Math.Min(Math.Abs(y - face.Top), Math.Abs(y - face.Bottom)))
+			var newX = localGuideFaces
+				.Select(guideFace =>
+				{
+					return GetBestGuideline(
+						guideFace.Left - face.Left,
+						guideFace.Right - face.Left,
+						guideFace.Left - face.Right,
+						guideFace.Right - face.Right,
+						guideFace.CenterX - face.CenterX);
+				})
+				.Where(x => x.Distance <= tolerance)
+				.OrderBy(x => x.Distance)
+				.Select(x => x.Offset + face.X)
+				.FirstOrDefault(face.X);
+
+			var newY = localGuideFaces
+				.Select(guideFace =>
+				{
+					return GetBestGuideline(
+						guideFace.Top - face.Top,
+						guideFace.Bottom - face.Top,
+						guideFace.Top - face.Bottom,
+						guideFace.Bottom - face.Bottom,
+						guideFace.CenterY - face.CenterY);
+				})
+				.Where(x => x.Distance <= tolerance)
+				.OrderBy(x => x.Distance)
+				.Select(x => x.Offset + face.Y)
 				.FirstOrDefault(face.Y);
-			var newY = Math.Abs(bestHorizontalGuideline - face.Top) < Math.Abs(bestHorizontalGuideline - face.Bottom) ?
-				bestHorizontalGuideline : bestHorizontalGuideline - face.Height;
 
 			return new Face(newX, newY, face.Width, face.Height);
+
+			(decimal Offset, decimal Distance) GetBestGuideline(params decimal[] offsets)
+			{
+				return offsets
+					.Select(x => (Offset: x, Distance: Math.Abs(x)))
+					.OrderBy(x => x.Distance)
+					.First();
+			}
 		}
 	}
 }

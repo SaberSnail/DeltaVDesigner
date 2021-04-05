@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DeltaVDesigner.Models;
+using DeltaVDesigner.Utility;
 using GoldenAnvil.Utility;
 using GoldenAnvil.Utility.Logging;
 using GoldenAnvil.Utility.Windows;
@@ -115,13 +116,13 @@ namespace DeltaVDesigner.UI.ComponentLayout
 					const decimal c_tolerance = 4.0M;
 					var tolerance = c_tolerance / (decimal) m_currentScale;
 					var newFace = new Face(newX, newY, comp.Component.Width, comp.Component.Length);
-					var otherComponents = Components.Where(x => x != comp.Component).AsReadOnlyList();
-					var horizontalGuides = otherComponents.SelectMany(x => EnumerableUtility.Enumerate(x.Y, x.Y + x.Length));
-					var verticalGuides = otherComponents.SelectMany(x => EnumerableUtility.Enumerate(x.X, x.X + x.Width));
-					newFace = ComponentUtility.SnapFaceToGuides(newFace, horizontalGuides, verticalGuides, tolerance);
+					var otherFaces = Components
+						.Where(x => x != comp.Component)
+						.Select(x => new Face(x.X, x.Y, x.Width, x.Length));
+					newFace = ComponentUtility.SnapFaceToGuides(newFace, otherFaces, tolerance);
 
-					m_mouseDownComponent.Value.Component.X = Math.Round(newFace.X, 3);
-					m_mouseDownComponent.Value.Component.Y = Math.Round(newFace.Y, 3);
+					m_mouseDownComponent.Value.Component.X = DecimalUtility.Round(newFace.X, 3, 0.5M);
+					m_mouseDownComponent.Value.Component.Y = DecimalUtility.Round(newFace.Y, 3, 0.5M);
 				}
 
 				e.Handled = true;
