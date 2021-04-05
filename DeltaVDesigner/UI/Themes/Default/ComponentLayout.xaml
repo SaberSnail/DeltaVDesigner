@@ -16,15 +16,8 @@
 	<Pen x:Key="ComponentLayoutComponentPen" Brush="{StaticResource Gray00Brush}" Thickness="1" presentationOptions:Freeze="true" />
 	<SolidColorBrush x:Key="ComponentLayoutComponentFill" Color="{StaticResource Gray90}" />
 
-	<Thickness x:Key="ComponentLayoutPadding">8,8,8,8</Thickness>
-	<core:Double x:Key="ComponentLayoutAnglePadding">8</core:Double>
-
 	<SolidColorBrush x:Key="ComponentLayoutIdTextBrush" Color="{StaticResource Gray60}" />
 	<core:Double x:Key="ComponentLayoutIdTextSize">10</core:Double>
 	<core:String x:Key="ComponentLayoutIdTextTypeface">Verdana</core:String>
-
-	<SolidColorBrush x:Key="ComponentLayoutLabelTextBrush" Color="{StaticResource Gray20}" />
-	<core:Double x:Key="ComponentLayoutLabelTextSize">12</core:Double>
-	<core:String x:Key="ComponentLayoutLabelTextTypeface">Verdana</core:String>
 
 </ResourceDictionary>

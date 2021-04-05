@@ -126,6 +126,9 @@ namespace DeltaVDesigner.Models
 
 			var bounds = component.GetFace(direction, unitSize);
 			var faceArea = bounds.Width * bounds.Height;
+			if (faceArea == 0)
+				return new HitTableRow[0];
+
 			var areasBehind = componentsBehind
 				.Select(x =>
 				{

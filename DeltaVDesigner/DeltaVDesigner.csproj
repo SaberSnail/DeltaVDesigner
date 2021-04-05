@@ -17,7 +17,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>OurResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UI\ComponentLayout\OurResources.Designer.cs">
+    <Compile Update="Models\OurResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>OurResources.resx</DependentUpon>
@@ -34,8 +34,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>OurResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="UI\ComponentLayout\OurResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <EmbeddedResource Update="Models\OurResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OurResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="UI\HitTables\OurResources.resx">

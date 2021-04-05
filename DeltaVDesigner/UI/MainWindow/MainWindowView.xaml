@@ -69,16 +69,6 @@
 						Style="{DynamicResource InlineValueTextBoxStyle}"
 						Text="{Binding Y}"
 						/>
-					<Button
-						Grid.Row="0"
-						Grid.Column="3"
-						Content="X"
-						BorderThickness="0"
-						HorizontalAlignment="Right"
-						VerticalAlignment="Center"
-						Padding="4,0"
-						Command="{Binding Converter={x:Static utility:MethodToCommandConverter.Instance}, ConverterParameter=Delete}"
-						/>
 
 					<TextBox
 						Grid.Row="1"
@@ -98,24 +88,37 @@
 						Style="{DynamicResource InlineValueTextBoxStyle}"
 						Text="{Binding Height}"
 						/>
+
+					<Button
+						Grid.Row="0"
+						Grid.Column="3"
+						Content="X"
+						BorderThickness="0"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						Padding="4,0"
+						Command="{Binding Converter={x:Static utility:MethodToCommandConverter.Instance}, ConverterParameter=Delete}"
+						/>
 				</Grid>
 			</DataTemplate>
 			
 			<DataTemplate DataType="{x:Type mainWindow:MainWindowViewModel}">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="3*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
 					</Grid.RowDefinitions>
 
 					<DockPanel
 						Grid.Row="0"
 						Grid.Column="0"
-						Grid.RowSpan="2"
+						Grid.RowSpan="3"
 						>
 						<DockPanel DockPanel.Dock="Bottom">
 							<Button
@@ -123,39 +126,128 @@
 								Command="{Binding Converter={x:Static utility:MethodToCommandConverter.Instance}, ConverterParameter=AddComponent}"
 								/>
 						</DockPanel>
-						<ListBox
+						<ScrollViewer
 							DockPanel.Dock="Top"
-							Grid.IsSharedSizeScope="true"
-							ItemsSource="{Binding Components}"
-							/>
+							HorizontalScrollBarVisibility="Auto"
+							VerticalScrollBarVisibility="Auto"
+							>
+							<ItemsControl
+								Grid.IsSharedSizeScope="true"
+								ItemsSource="{Binding Components}"
+								/>
+						</ScrollViewer>
 					</DockPanel>
 					
 					<GridSplitter
 						Grid.Row="0"
-						Grid.Column="0"
-						Grid.RowSpan="2"
-						HorizontalAlignment="Right"
+						Grid.Column="1"
+						Grid.RowSpan="3"
+						HorizontalAlignment="Center"
 						VerticalAlignment="Stretch"
 						Width="4"
 						/>
 
-					<clayout:ComponentLayoutControl
-						Grid.Row="0"
-						Grid.Column="1"
-						Components="{Binding Components}"
-						/>
+					<Grid Grid.Row="0" Grid.Column="2">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="*" />
+							<RowDefinition Height="*" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<clayout:ComponentLayoutControl
+							Grid.Row="0"
+							Grid.Column="0"
+							Grid.RowSpan="4"
+							Padding="4"
+							Components="{Binding Components}"
+							Direction="{x:Static models:Direction.Top}"
+							/>
+						<TextBlock
+							Grid.Row="0"
+							Grid.Column="0"
+							Grid.RowSpan="4"
+							Margin="4"
+							IsHitTestVisible="false"
+							Text="{x:Static models:OurResources.Direction_Top}"
+							/>
+
+						<clayout:ComponentLayoutControl
+							Grid.Row="0"
+							Grid.Column="1"
+							Padding="4"
+							Components="{Binding Components}"
+							Direction="{x:Static models:Direction.Left}"
+							/>
+						<TextBlock
+							Grid.Row="0"
+							Grid.Column="1"
+							Margin="4"
+							IsHitTestVisible="false"
+							Text="{x:Static models:OurResources.Direction_Left}"
+							/>
+
+						<clayout:ComponentLayoutControl
+							Grid.Row="1"
+							Grid.Column="1"
+							Padding="4"
+							Components="{Binding Components}"
+							Direction="{x:Static models:Direction.Right}"
+							/>
+						<TextBlock
+							Grid.Row="1"
+							Grid.Column="1"
+							Margin="4"
+							IsHitTestVisible="false"
+							Text="{x:Static models:OurResources.Direction_Right}"
+							/>
+
+						<clayout:ComponentLayoutControl
+							Grid.Row="2"
+							Grid.Column="1"
+							Padding="4"
+							Components="{Binding Components}"
+							Direction="{x:Static models:Direction.Front}"
+							/>
+						<TextBlock
+							Grid.Row="2"
+							Grid.Column="1"
+							Margin="4"
+							IsHitTestVisible="false"
+							Text="{x:Static models:OurResources.Direction_Front}"
+							/>
+
+						<clayout:ComponentLayoutControl
+							Grid.Row="3"
+							Grid.Column="1"
+							Padding="4"
+							Components="{Binding Components}"
+							Direction="{x:Static models:Direction.Back}"
+							/>
+						<TextBlock
+							Grid.Row="3"
+							Grid.Column="1"
+							Margin="4"
+							IsHitTestVisible="false"
+							Text="{x:Static models:OurResources.Direction_Back}"
+							/>
+					</Grid>
 
 					<GridSplitter
-						Grid.Row="0"
-						Grid.Column="1"
+						Grid.Row="1"
+						Grid.Column="2"
 						HorizontalAlignment="Stretch"
-						VerticalAlignment="Bottom"
+						VerticalAlignment="Center"
 						Height="4"
 						/>
 
 					<ContentControl
-						Grid.Row="1"
-						Grid.Column="1"
+						Grid.Row="2"
+						Grid.Column="2"
 						Focusable="false"
 						Content="{Binding HitTables}"
 						/>

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeltaVDesigner.Models
 {
 	public struct Face
 	{
-		public static Face Empty => s_empty;
+		public static Face Empty => new(0, 0, Decimal.MinValue, Decimal.MinValue);
 
 		public Face(decimal x, decimal y, decimal width, decimal height)
 		{
@@ -52,7 +48,5 @@ namespace DeltaVDesigner.Models
 
 			return new Face(left, top, width, height);
 		}
-
-		readonly static Face s_empty = new Face(0, 0, Decimal.MinValue, Decimal.MinValue);
 	}
 }

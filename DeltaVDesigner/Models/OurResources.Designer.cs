@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeltaVDesigner.UI.ComponentLayout {
+namespace DeltaVDesigner.Models {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class OurResources {
+    public class OurResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DeltaVDesigner.UI.ComponentLayout.OurResources", typeof(OurResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DeltaVDesigner.Models.OurResources", typeof(OurResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        internal static string Direction_Back {
+        public static string Direction_Back {
             get {
                 return ResourceManager.GetString("Direction_Back", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         /// <summary>
         ///   Looks up a localized string similar to Front.
         /// </summary>
-        internal static string Direction_Front {
+        public static string Direction_Front {
             get {
                 return ResourceManager.GetString("Direction_Front", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         /// <summary>
         ///   Looks up a localized string similar to Left.
         /// </summary>
-        internal static string Direction_Left {
+        public static string Direction_Left {
             get {
                 return ResourceManager.GetString("Direction_Left", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         /// <summary>
         ///   Looks up a localized string similar to Right.
         /// </summary>
-        internal static string Direction_Right {
+        public static string Direction_Right {
             get {
                 return ResourceManager.GetString("Direction_Right", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace DeltaVDesigner.UI.ComponentLayout {
         /// <summary>
         ///   Looks up a localized string similar to Top.
         /// </summary>
-        internal static string Direction_Top {
+        public static string Direction_Top {
             get {
                 return ResourceManager.GetString("Direction_Top", resourceCulture);
             }

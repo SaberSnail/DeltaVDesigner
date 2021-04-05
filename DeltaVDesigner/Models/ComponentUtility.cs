@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using GoldenAnvil.Utility;
 
 namespace DeltaVDesigner.Models
 {
@@ -37,11 +37,11 @@ namespace DeltaVDesigner.Models
 		{
 			return direction switch
 			{
-				Direction.Top => components,
-				Direction.Left => components.OrderByDescending(x => x.GetFaceCoordinate(direction)),
-				Direction.Right => components.OrderBy(x => x.GetFaceCoordinate(direction)),
-				Direction.Front => components.OrderByDescending(x => x.GetFaceCoordinate(direction)),
-				Direction.Back => components.OrderBy(x => x.GetFaceCoordinate(direction)),
+				Direction.Top => components.OrderByDescending(x => x.Width * x.Height),
+				Direction.Left => components.OrderByDescending(x => x.GetFaceCoordinate(direction)).ThenByDescending(x => x.Height * x.Length),
+				Direction.Right => components.OrderBy(x => x.GetFaceCoordinate(direction)).ThenByDescending(x => x.Height * x.Length),
+				Direction.Front => components.OrderByDescending(x => x.GetFaceCoordinate(direction)).ThenByDescending(x => x.Height * x.Width),
+				Direction.Back => components.OrderBy(x => x.GetFaceCoordinate(direction)).ThenByDescending(x => x.Height * x.Width),
 				_ => throw new NotImplementedException($"Unhandled direction: '{direction}'"),
 			};
 		}
@@ -55,6 +55,25 @@ namespace DeltaVDesigner.Models
 				components.Max(x => x.GetFaceCoordinate(Direction.Right)) - components.Min(x => x.GetFaceCoordinate(Direction.Left)),
 				components.Max(x => x.GetFaceCoordinate(Direction.Back)) - components.Min(x => x.GetFaceCoordinate(Direction.Front)),
 				components.Max(x => x.GetFaceCoordinate(Direction.Top)));
+		}
+
+		public static Face SnapFaceToGuides(Face face, IEnumerable<decimal> horizontalGuides, IEnumerable<decimal> verticalGuides, decimal tolerance)
+		{
+			var bestVerticalGuideline = verticalGuides
+				.Where(x => (Math.Abs(x - face.Left) < tolerance) || (Math.Abs(x - face.Right) < tolerance))
+				.OrderBy(x => Math.Min(Math.Abs(x - face.Left), Math.Abs(x - face.Right)))
+				.FirstOrDefault(face.X);
+			var newX = Math.Abs(bestVerticalGuideline - face.Left) < Math.Abs(bestVerticalGuideline - face.Right) ?
+				bestVerticalGuideline : bestVerticalGuideline - face.Width;
+
+			var bestHorizontalGuideline = horizontalGuides
+				.Where(y => (Math.Abs(y - face.Top) < tolerance) || (Math.Abs(y - face.Bottom) < tolerance))
+				.OrderBy(y => Math.Min(Math.Abs(y - face.Top), Math.Abs(y - face.Bottom)))
+				.FirstOrDefault(face.Y);
+			var newY = Math.Abs(bestHorizontalGuideline - face.Top) < Math.Abs(bestHorizontalGuideline - face.Bottom) ?
+				bestHorizontalGuideline : bestHorizontalGuideline - face.Height;
+
+			return new Face(newX, newY, face.Width, face.Height);
 		}
 	}
 }
